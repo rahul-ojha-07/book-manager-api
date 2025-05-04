@@ -41,8 +41,23 @@ public class BookService {
                         new BookNotFoundException(HttpStatus.NOT_FOUND, String.format("Book with given id: %s  not found", id)));
     }
 
+    public BookModel updateBookById(Long id, BookModel bookToUpdate) {
+        if (!repository.existsById(id)) {
+            throw new BookNotFoundException(HttpStatus.NOT_FOUND, String.format("Book with given id: %s  not found", id));
+        }
+        bookToUpdate.setId(id);
+        validateRequest(bookToUpdate);
+        Book updatedBook = repository.save(bookToUpdate.toEntity());
+        return  BookModel.fromEntity(updatedBook);
+    }
+
 
     private void validateRequest(BookModel book){
+
+        if (null == book){
+            throw new IllegalArgumentException("Book does not have any data.");
+        }
+
          List<ValidationResponse> validationResponses = fieldValidators.stream()
                 .map(validator -> validator.validate(book))
                 .filter(ValidationResponse::isFailure).toList();
