@@ -1,6 +1,7 @@
 package in.rahulojha.bookmanagerapi.controller;
 
 import in.rahulojha.bookmanagerapi.entity.Book;
+import in.rahulojha.bookmanagerapi.model.BookModel;
 import in.rahulojha.bookmanagerapi.service.BookService;
 import in.rahulojha.bookmanagerapi.validators.FieldValidator;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +18,13 @@ public class BookController {
 
     private final BookService bookService;
 
+    @GetMapping("/books")
+    ResponseEntity<List<BookModel>> getAllBooks() {
+        return ResponseEntity.ok().body(bookService.getAllBooks());
+    }
 
     @PostMapping("/books")
-    ResponseEntity<Book> addBook(@RequestBody Book book) {
+    ResponseEntity<BookModel> addBook(@RequestBody BookModel book) {
 
         return ResponseEntity.ok().body(bookService.addBook(book));
     }

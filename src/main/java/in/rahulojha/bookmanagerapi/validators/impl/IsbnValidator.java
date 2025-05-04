@@ -2,6 +2,7 @@ package in.rahulojha.bookmanagerapi.validators.impl;
 
 import com.sun.jdi.request.DuplicateRequestException;
 import in.rahulojha.bookmanagerapi.entity.Book;
+import in.rahulojha.bookmanagerapi.model.BookModel;
 import in.rahulojha.bookmanagerapi.model.ValidationResponse;
 import in.rahulojha.bookmanagerapi.repository.BookRepository;
 import in.rahulojha.bookmanagerapi.validators.FieldValidator;
@@ -19,7 +20,7 @@ public class IsbnValidator implements FieldValidator {
 
 
     @Override
-    public ValidationResponse validate(Book book) {
+    public ValidationResponse validate(BookModel book) {
 
         if (book.getIsbn() == null) {
             return ValidationResponse.newFailureResponse(fieldName, "Can not be null or empty");
