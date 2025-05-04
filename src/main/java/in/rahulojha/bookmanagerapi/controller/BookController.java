@@ -35,4 +35,11 @@ public class BookController {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(bookService.getBookById(id));
     }
+
+    @PutMapping("/books/{id}")
+    ResponseEntity<BookModel> updateBookById(@PathVariable("id") Long id, @RequestBody BookModel bookModel) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(bookService.updateBookById(id, bookModel));
+    }
 }
