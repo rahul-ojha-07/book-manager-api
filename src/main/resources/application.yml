@@ -1,3 +1,19 @@
 spring:
   application:
     name: book-manager-api
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+    hikari:
+      minimum-idle: 5 # Sets the minimum pool size
+      maximum-pool-size: 15 # Sets the maximum pool size
+      auto-commit: false # Sets autocommit mode to false
+
+  h2:
+    console:
+      enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: update
