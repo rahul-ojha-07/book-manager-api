@@ -2,14 +2,17 @@ package in.rahulojha.bookmanagerapi.service;
 
 
 import in.rahulojha.bookmanagerapi.entity.Book;
+import in.rahulojha.bookmanagerapi.exception.BookNotFoundException;
 import in.rahulojha.bookmanagerapi.model.BookModel;
 import in.rahulojha.bookmanagerapi.model.ValidationResponse;
 import in.rahulojha.bookmanagerapi.repository.BookRepository;
 import in.rahulojha.bookmanagerapi.validators.FieldValidator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,7 +33,13 @@ public class BookService {
         return BookModel.fromEntity(repository.save(book.toEntity()));
     }
 
-
+    public BookModel getBookById(Long id) {
+        Optional<Book> optionalBook = repository.findById(id);
+        return optionalBook
+                .map( BookModel::new)
+                .orElseThrow(() ->
+                        new BookNotFoundException(HttpStatus.NOT_FOUND, String.format("Book with given id: %s  not found", id)));
+    }
 
 
     private void validateRequest(BookModel book){

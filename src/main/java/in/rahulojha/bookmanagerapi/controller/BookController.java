@@ -1,15 +1,14 @@
 package in.rahulojha.bookmanagerapi.controller;
 
-import in.rahulojha.bookmanagerapi.entity.Book;
 import in.rahulojha.bookmanagerapi.model.BookModel;
 import in.rahulojha.bookmanagerapi.service.BookService;
-import in.rahulojha.bookmanagerapi.validators.FieldValidator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -25,8 +24,15 @@ public class BookController {
 
     @PostMapping("/books")
     ResponseEntity<BookModel> addBook(@RequestBody BookModel book) {
-
-        return ResponseEntity.ok().body(bookService.addBook(book));
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(bookService.addBook(book));
     }
 
+    @GetMapping("/books/{id}")
+    ResponseEntity<BookModel> getBookById(@PathVariable("id") Long id) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(bookService.getBookById(id));
+    }
 }
