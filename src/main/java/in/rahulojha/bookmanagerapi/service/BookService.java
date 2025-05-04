@@ -51,6 +51,14 @@ public class BookService {
         return  BookModel.fromEntity(updatedBook);
     }
 
+    public String deleteBookById(Long id) {
+        if (!repository.existsById(id)) {
+            throw new BookNotFoundException(HttpStatus.NOT_FOUND, String.format("Book with given id: %s  not found", id));
+        }
+        repository.deleteById(id);
+        return "Deleted! Book with Id: " + id;
+    }
+
 
     private void validateRequest(BookModel book){
 

@@ -42,4 +42,11 @@ public class BookController {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(bookService.updateBookById(id, bookModel));
     }
+
+    @DeleteMapping("/books/{id}")
+    ResponseEntity<String> deleteBookById(@PathVariable("id") Long id) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(bookService.deleteBookById(id));
+    }
 }
