@@ -2,6 +2,7 @@ package in.rahulojha.bookmanagerapi.service;
 
 
 import in.rahulojha.bookmanagerapi.entity.Book;
+import in.rahulojha.bookmanagerapi.model.BookModel;
 import in.rahulojha.bookmanagerapi.model.ValidationResponse;
 import in.rahulojha.bookmanagerapi.repository.BookRepository;
 import in.rahulojha.bookmanagerapi.validators.FieldValidator;
@@ -18,16 +19,21 @@ public class BookService {
     private final List<FieldValidator> fieldValidators;
 
 
+    public List<BookModel> getAllBooks() {
+        return repository.findAll().stream()
+                .map(BookModel::new)
+                .toList();
+    }
 
-    public Book addBook(Book book) {
+    public BookModel addBook(BookModel book) {
         validateRequest(book);
-        return repository.save(book);
+        return BookModel.fromEntity(repository.save(book.toEntity()));
     }
 
 
 
 
-    private void validateRequest(Book book){
+    private void validateRequest(BookModel book){
          List<ValidationResponse> validationResponses = fieldValidators.stream()
                 .map(validator -> validator.validate(book))
                 .filter(ValidationResponse::isFailure).toList();
