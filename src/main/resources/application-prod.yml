@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: book-manager-api
+  datasource:
+    url: ${DATABASE_URL}
+    driver-class-name: ${DATABASE_DRIVER}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    hikari:
+      minimum-idle: 5 # Sets the minimum pool size
+      maximum-pool-size: 15 # Sets the maximum pool size
+      auto-commit: false # Sets autocommit mode to false
+  jpa:
+    hibernate:
+      ddl-auto: update
