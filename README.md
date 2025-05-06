@@ -1,6 +1,6 @@
 # 📘 Book Manager API - User Stories & Acceptance Criteria
 
-## 🧱 User Story #1: Project Setup
+## 🧱 User Story #1: Project Setup : DONE
 
 **As a developer**, I want to set up a Spring Boot project with the necessary dependencies, so that I can start building the Book Manager API.
 
@@ -8,11 +8,11 @@
 
 * ✅ Given a new project, when I generate it with Spring Initializr, then it includes dependencies: Spring Web, Spring Data JPA, H2/PostgreSQL, and Lombok.
 * ✅ Should use Maven or Gradle for build management.
-* ✅ Should run without errors using `./mvnw spring-boot:run` or `./gradlew bootRun`.
+* ✅ Should run without errors using `./mvnw spring-boot:run` or `./gradlew bootRun`. 
 
 ---
 
-## 📦 User Story #2: Create Book Entity
+## 📦 User Story #2: Create Book Entity : DONE
 
 **As a developer**, I want to define a `Book` entity class, so that I can model book data in the application.
 
@@ -25,7 +25,7 @@
 
 ---
 
-## 🛠️ User Story #3: Implement Create Book (POST)
+## 🛠️ User Story #3: Implement Create Book (POST) : DONE
 
 **As a user**, I want to add a new book, so that I can store book details in the system.
 
@@ -38,7 +38,7 @@
 
 ---
 
-## 🔍 User Story #4: Get All Books (GET)
+## 🔍 User Story #4: Get All Books (GET) : DONE
 
 **As a user**, I want to retrieve a list of all books, so that I can see everything in the system.
 
@@ -50,7 +50,7 @@
 
 ---
 
-## 🔎 User Story #5: Get Book by ID (GET)
+## 🔎 User Story #5: Get Book by ID (GET) : DONE
 
 **As a user**, I want to retrieve a single book by ID, so that I can view its details.
 
@@ -61,7 +61,7 @@
 
 ---
 
-## ✏️ User Story #6: Update Book (PUT)
+## ✏️ User Story #6: Update Book (PUT) : DONE
 
 **As a user**, I want to update the details of a book, so that I can correct or change information.
 
@@ -74,7 +74,7 @@
 
 ---
 
-## 🗑️ User Story #7: Delete Book (DELETE)
+## 🗑️ User Story #7: Delete Book (DELETE) : DONE
 
 **As a user**, I want to delete a book by ID, so that I can remove outdated or incorrect records.
 
@@ -85,7 +85,7 @@
 
 ---
 
-## 🧪 User Story #8: Input Validation
+## 🧪 User Story #8: Input Validation : DONE
 
 **As a developer**, I want to validate input data, so that only correct book data is processed.
 
@@ -98,7 +98,7 @@
 
 ---
 
-## 🚨 User Story #9: Global Error Handling
+## 🚨 User Story #9: Global Error Handling : DONE
 
 **As a user**, I want to receive consistent and informative error responses, so that I can understand and fix issues.
 
@@ -110,7 +110,7 @@
 
 ---
 
-## 🧪 User Story #10: Unit & Integration Testing
+## 🧪 User Story #10: Unit & Integration Testing : PENDING
 
 **As a developer**, I want to write tests for each API endpoint, so that I can ensure correctness and catch regressions.
 
@@ -123,7 +123,7 @@
 
 ---
 
-## ☁️ User Story #11: Application Deployment (Optional)
+## ☁️ User Story #11: Application Deployment (Optional) : DONE
 
 **As a developer**, I want to deploy the API to a cloud platform, so that others can access it remotely.
 
