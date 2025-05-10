@@ -1,8 +1,9 @@
 package in.rahulojha.bookmanagerapi.model;
 
-import in.rahulojha.bookmanagerapi.entity.Book;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import in.rahulojha.bookmanagerapi.entity.Book;
 
 @Data
 @NoArgsConstructor
