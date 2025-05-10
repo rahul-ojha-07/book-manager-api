@@ -30,6 +30,8 @@ services:
       - "8080:8080"
     depends_on:
       - postgres
+    volumes:
+      - ./logs:/app/logs
     networks:
       - book-network
 
