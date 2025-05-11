@@ -2,56 +2,44 @@
 
 ![Book Manager Banner](https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format\&fit=crop\&w=1350\&q=80)
 
-![Java](https://img.shields.io/badge/Java-17-blue?style=for-the-badge\&logo=java)
-![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.x-green?style=for-the-badge\&logo=springboot)
-![Gradle](https://img.shields.io/badge/Gradle-7.x-blue?style=for-the-badge\&logo=gradle)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15.x-blue?style=for-the-badge\&logo=postgresql)
-![Docker](https://img.shields.io/badge/Docker-Compose-blue?style=for-the-badge\&logo=docker)
+![Java](https://img.shields.io/badge/Java-17-blue?style=for-the-badge&logo=openjdk)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.2-green?style=for-the-badge&logo=spring)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue?style=for-the-badge&logo=postgresql)
+![Docker](https://img.shields.io/badge/Dockerized-%E2%9C%94-blue?style=for-the-badge&logo=docker)
+![JWT](https://img.shields.io/badge/Security-JWT-yellowgreen?style=for-the-badge&logo=jwt)
 
-> A RESTful API for managing books built with Spring Boot, Gradle, PostgreSQL, and Docker — designed for easy deployment and clean architecture.
-
----
-
-## 🚀 Features
-
-* 📘 CRUD operations for books
-* 🧾 Validation & error handling
-* 🐘 PostgreSQL database (via Docker Compose)
-* 🔍 Clean architecture with service-layer abstraction
-* 🐳 Dockerfile & Docker Compose support
-* 🧪 Unit and integration tests
+A secure and scalable Book Management REST API built with **Java**, **Spring Boot**, **PostgreSQL**, **JWT**, and **Docker**. It supports full CRUD functionality, user authentication, validation, rate limiting, and follows clean architectural practices.
 
 ---
 
-## 🗂️ Project Structure
+## ✨ Features
 
-```
-.
-├── BookManagerApiApplication.java        # Main entry point
-├── config/                               # App configurations
-├── controller/                           # REST Controllers
-│   └── BookController.java
-├── entity/                               # JPA Entities
-│   └── Book.java
-├── exception/                            # Custom Exceptions
-│   ├── BookNotFoundException.java
-│   └── GlobalExceptionHandler.java
-├── model/                                # Request/Response Models
-│   ├── BookModel.java
-│   ├── ErrorResponse.java
-│   └── ValidationResponse.java
-├── repository/                           # Spring Data JPA Repos
-│   └── BookRepository.java
-├── service/                              # Business Logic
-│   └── BookService.java
-├── utils/                                # Utility classes
-└── validators/                           # Field validation logic
-    ├── FieldValidator.java
-    └── impl/
-        ├── AuthorValidator.java
-        ├── IsbnValidator.java
-        ├── PublicationYearValidator.java
-        └── TitleValidator.java
+- ✅ CRUD operations on books (`title`, `author`, `isbn`, `publicationYear`)
+- 🔐 JWT-based authentication & authorization
+- 📏 Field validation with custom validators
+- 🚫 Global exception handling
+- 🧵 Rate limiting using filter-based logic (IP/User)
+- 📦 Docker & Docker Compose support
+- 🧪 Easily extendable and testable
+
+---
+
+## 📂 Project Structure
+
+```plaintext
+src/main/java/in/rahulojha/bookmanagerapi
+├── auth                      # JWT auth logic (controller, service, models)
+├── config                    # Spring Security configuration
+├── controller                # BookController for API endpoints
+├── entity                    # JPA entities (Book, AppUser)
+├── exception                 # Global exception handling
+├── filter                    # Filters: JWT + Rate Limiting
+├── model                     # DTOs and API response models
+├── repository                # Spring Data JPA repositories
+├── service                   # Core business logic
+├── utils                     # JWT utility class
+└── validators                # Custom field-level validators
+
 ```
 
 ---
@@ -79,13 +67,51 @@ This will:
 
 ### 3️⃣ API Endpoints
 
-| Method | Endpoint          | Description       |
-| ------ | ----------------- | ----------------- |
-| POST   | `/api/books`      | Create a new book |
-| GET    | `/api/books`      | Get all books     |
-| GET    | `/api/books/{id}` | Get a book by ID  |
-| PUT    | `/api/books/{id}` | Update a book     |
-| DELETE | `/api/books/{id}` | Delete a book     |
+| Method | Endpoint          | Description                |
+| ------ |-------------------|----------------------------|
+| POST   | `/auth/register`  | Create a new user          |
+| POST   | `/auth/login`     | Login to get JWT token |
+| POST   | `/api/books`      | Create a new book          |
+| GET    | `/api/books`      | Get all books              |
+| GET    | `/api/books/{id}` | Get a book by ID           |
+| PUT    | `/api/books/{id}` | Update a book              |
+| DELETE | `/api/books/{id}` | Delete a book              |
+
+---
+## 🔐 Authentication
+
+### 🔐 Login to Get Token
+
+```http
+POST /auth/login
+Content-Type: application/json
+
+{
+  "username": "user1",
+  "password": "password123"
+}
+```
+
+### 🔐 Use Token for Requests
+
+Add to headers:
+
+```http
+Authorization: Bearer <your-jwt-token>
+```
+---
+## 📊 Rate Limiting
+
+* **Unauthenticated Users** → Tracked by IP
+* **Authenticated Users** → Tracked by `username` in JWT
+* Limit: `5 requests/minute`
+
+Returns:
+
+```http
+429 Too Many Requests
+Rate limit exceeded. Try again later.
+```
 
 ---
 
@@ -102,11 +128,13 @@ This will:
 ## 🧰 Tech Stack
 
 * Java 17
-* Spring Boot 3.x
-* Gradle 7.x
-* PostgreSQL 15 (via Docker Compose)
+* Spring Boot 3.4+
+* Spring Security + JWT
+* PostgreSQL
+* Gradle
+* Docker & Docker Compose
 * JPA/Hibernate
-* JUnit 5 + Mockito
+* Log4j2
 
 ---
 
@@ -175,6 +203,8 @@ services:
       - "8080:8080"
     depends_on:
       - postgres
+    volumes:
+      - ./logs:/app/logs
     networks:
       - book-network
 
@@ -185,7 +215,7 @@ networks:
   book-network:
     driver: bridge
 ```
-
+[README.md](README.md)
 ---
 
 ## ✅ To Do
