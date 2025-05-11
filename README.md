@@ -196,7 +196,7 @@ networks:
 * [x] Docker support
 * [x] PostgreSQL integration
 * [ ] Unit and Integration Tests
-* [ ] Swagger/OpenAPI docs
+* [x] Swagger/OpenAPI docs
 * [ ] CI/CD via GitHub Actions
 
 ---
